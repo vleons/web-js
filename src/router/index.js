@@ -11,6 +11,11 @@ const routes = [
     name: 'Groups',
     component: () => import('@/pages/Groups'),
   },
+  {
+    path: '/createStudent',
+    name: 'CreateStudent',
+    component: () => import('@/pages/CreateStudent'),
+  },
 ]
 
 const router = createRouter({

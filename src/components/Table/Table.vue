@@ -12,14 +12,17 @@
       <tbody :class="$style.body">
         <tr :class="$style.row">
           <td>1</td>
-          <td>Максим</td>
-          <td>Зенин</td>
-          <td>Максимович</td>
+          <td>ПИ</td>
+          <td>Автоматизация</td>
+          <td>
+            <Btn :text="'Удалить'" :theme="'danger'" />
+            <Btn :text="'Изменить'" :theme="'info'" />
+          </td>
         </tr>
         <tr :class="$style.row">
           <td>1</td>
-          <td>Артем</td>
-          <td>Звездилин</td>
+          <td>ПМИ</td>
+          <td>Программирование</td>
           <td>Артемович</td>
         </tr>
       </tbody>
@@ -28,8 +31,12 @@
 </template>
 
 <script>
+import Btn from '@/components/Btn/Btn';
 export default {
   name: 'Table',
+  components: {
+    Btn,
+  }
 }
 </script>
 
@@ -41,6 +48,7 @@ export default {
     border-collapse: collapse;
     th, td {
       padding: 10px;
+      text-align: center;
     }
 
     th {
