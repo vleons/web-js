@@ -1,11 +1,26 @@
 <template>
   <div id="nav">
     <router-link to="/groups">Группы</router-link>
-    <router-link to="/">Студенты</router-link>
+    <router-link to="/students">Студенты</router-link>
   </div>
   <router-view/>
 </template>
+<script>
+import { useStore } from 'vuex';
+import { onMounted } from 'vue';
+import { fetchItems as fetchStudents} from '@/store/students/selectors';
+import { fetchItems as fetchGroups } from '@/store/groups/selectors';
 
+export default {
+  setup() {
+    const store = useStore();
+    onMounted(() => {
+      fetchStudents(store);
+      fetchGroups(store);
+    })
+  }
+}
+</script>
 <style lang="scss">
 body {
   margin: 0;

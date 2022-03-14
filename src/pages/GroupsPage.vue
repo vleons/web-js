@@ -1,15 +1,18 @@
 <template>
-  <Layout  title="Группы" />
-  <div :class="$style.root">
-  </div>
+  <Layout title="Группы">
+    <GroupList />
+  </Layout>
 </template>
 
 <script>
 import Layout from '@/components/Layout/Layout';
+import GroupList from '@/components/GroupList/GroupList';
+
 export default {
-  name: 'Groups',
+  name: 'GroupsPage',
   components: {
-    Layout
+    Layout,
+    GroupList,
   }
 }
 </script>
@@ -17,9 +20,5 @@ export default {
 <style module lang="scss">
 .root {
 
-  .title {
-    text-align: center;
-    font-size: 28px;
-  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <button :class="[$style.root, $style[theme]]">
-    {{ text }}
+  <button  :class="[$style.root, $style[theme]]">
+    <slot />
   </button>
 </template>
 
@@ -8,7 +8,6 @@
 export default {
   name: 'Btn',
   props: {
-    text: String,
     theme: String
   }
 }
@@ -18,7 +17,7 @@ export default {
 
 .root {
   border: none;
-  padding: 0.375rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   font-size: 1rem;
   border-radius: 0.25rem;
   color: white;

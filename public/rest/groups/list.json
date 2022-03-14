@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "group": "ПМИ",
+    "speciality": "Автоматизация",
+    "url": "/group/3"
+  },
+  {
+    "id": 2,
+    "group": "МОС",
+    "speciality": "Программирование",
+    "url": "/group/3"
+  },
+  {
+    "id": 3,
+    "group": "ПИ",
+    "speciality": "Автоматизация",
+    "url": "/group/3"
+  },
+  {
+    "id": 4,
+    "group": "ПМИ",
+    "speciality": "Программирование",
+    "url": "/group/3"
+  }
+]

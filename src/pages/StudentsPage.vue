@@ -1,17 +1,18 @@
 <template>
-  <Layout title="Группы">
-    <Table />
+  <Layout title="Студенты">
+    <StudentList />
   </Layout>
 </template>
 
 <script>
 import Layout from '@/components/Layout/Layout';
-import Table from '@/components/Table/Table';
+import StudentList from '@/components/StudentList/StudentList';
+
 export default {
-  name: 'Groups',
+  name: 'Students',
   components: {
     Layout,
-    Table,
+    StudentList,
   }
 }
 </script>

@@ -3,27 +3,18 @@
     <table :class="$style.table">
       <thead :class="$style.head">
         <tr :class="$style.row">
-        <th>Id</th>
-        <th>Группа</th>
-        <th>Специальность</th>
-        <th>Действие</th>
+          <th v-for="{ value, text } in headers" :key="value">
+            {{ text }}
+          </th>
       </tr>
       </thead>
       <tbody :class="$style.body">
-        <tr :class="$style.row">
-          <td>1</td>
-          <td>ПИ</td>
-          <td>Автоматизация</td>
-          <td>
-            <Btn :text="'Удалить'" :theme="'danger'" />
-            <Btn :text="'Изменить'" :theme="'info'" />
+        <tr v-for="(item, idx) in items" :key="idx">
+          <td v-for="(key, idx) in colKeys" :key="idx">
+            <slot :name="key" v-bind="{ item }">
+              {{ item[key] }}
+            </slot>
           </td>
-        </tr>
-        <tr :class="$style.row">
-          <td>1</td>
-          <td>ПМИ</td>
-          <td>Программирование</td>
-          <td>Артемович</td>
         </tr>
       </tbody>
     </table>
@@ -31,11 +22,16 @@
 </template>
 
 <script>
-import Btn from '@/components/Btn/Btn';
 export default {
   name: 'Table',
-  components: {
-    Btn,
+  props: {
+    items: Array,
+    headers: Array,
+  },
+  computed: {
+    colKeys() {
+      return this.headers.map(({ value }) => value);
+    }
   }
 }
 </script>

@@ -1,12 +1,12 @@
 import { createStore } from 'vuex'
-
+import students from './students';
+import groups from './groups';
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-  }
+    students,
+    groups,
+  },
+  state: {},
+  mutations: {},
+  actions: {},
 })
