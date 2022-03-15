@@ -13,9 +13,14 @@ class Students extends Api {
    * @param id
    * @returns {Promise<*>}
    */
-  remove = ( id ) => this.rest('/students/delete-item.json', {
+  remove = ( id ) => this.rest('/students/delete-item', {
     method: 'POST',
     data: id,
+  });
+
+  add = ( form ) => this.rest('/students/add-item', {
+    method: 'POST',
+    data: form,
   });
 
 }

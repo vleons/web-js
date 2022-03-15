@@ -11,17 +11,27 @@ export default {
   mutations: {
     setItems: (state, items) => {
       state.items = items;
+    },
+    setItem: (state, item) => {
+      state.items.push(item);
     }
   },
   actions: {
     fetchItems: async ({ commit }) => {
-      const items = await api.students().then(items => items.json());
+      const response = await api.students();
+      const items = await response.json();
+      console.log(items, 'itemss')
       commit('setItems', items)
     },
     removeItem: async ({ dispatch }, id) => {
       await api.remove( id ).then(() => {
         dispatch('fetchItems');
       });
+    },
+    addItem: async ({ commit }, form) => {
+      await api.add(form)
+      console.log(form, 'add')
+      commit('setItem', form)
     }
   },
 }

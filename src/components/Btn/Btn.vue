@@ -1,5 +1,5 @@
 <template>
-  <button  :class="[$style.root, $style[theme]]">
+  <button :disabled="disabled"  :class="[$style.root, $style[theme]]">
     <slot />
   </button>
 </template>
@@ -8,7 +8,8 @@
 export default {
   name: 'Btn',
   props: {
-    theme: String
+    theme: String,
+    disabled: Boolean,
   }
 }
 </script>
@@ -24,6 +25,12 @@ export default {
   cursor: pointer;
   & + .root {
     margin-left: 8px;
+  }
+
+  &[disabled] {
+    cursor: default;
+    pointer-events: none;
+    background: #c8cccc;
   }
 }
 
