@@ -32,12 +32,12 @@
       <Btn @click="onClick" :disabled="!isValidForm" theme="info">Сохранить</Btn>
     </div>
   </div>
-
 </template>
 
 <script>
 import { computed, reactive } from 'vue';
 import { useStore } from 'vuex';
+
 import { addItem } from '@/store/students/selectors';
 import Btn from '@/components/Btn/Btn';
 export default {
@@ -56,8 +56,10 @@ export default {
 
     return {
       form,
-      isValidForm: computed(() => {return !!(form.name && form.surname && form.patronymic && form.group)}),
-      onClick: () => { addItem(store, form) }
+      isValidForm: computed(() =>  !!(form.name && form.surname && form.patronymic && form.group)),
+      onClick: () => {
+        addItem(store, form);
+      }
     }
   },
 }

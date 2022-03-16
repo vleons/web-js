@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.root">
-    <table :class="$style.table">
+    <table v-if="items.length" :class="$style.table">
       <thead :class="$style.head">
         <tr :class="$style.row">
           <th v-for="{ value, text } in headers" :key="value">

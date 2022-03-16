@@ -2,11 +2,11 @@
   <div :class="$style.root">
     <Table :headers="headers" :items="items">
       <template v-slot:control="{ item }">
-        <Btn theme="info">Изменить {{ item.id }}</Btn>
+        <Btn theme="info">Изменить</Btn>
         <Btn @click="onClick(item.id)" theme="danger">Удалить</Btn>
       </template>
     </Table>
-    <router-link to="/CreateStudent">
+    <router-link to="/StudentEdit">
       <Btn :class="$style.create" theme="info">Создать</Btn>
     </router-link>
   </div>

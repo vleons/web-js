@@ -1,25 +1,23 @@
 <template>
   <div :class="$style.root">
     <Table :headers="headers" :items="items">
-      <template v-slot:group="{ item }">
-        <a :href="item.url"> {{ item.group }} </a>
-      </template>
       <template v-slot:control="{ item }">
-        <Btn theme="info">Изменить {{item.id}}</Btn>
-        <Btn @click="onClick(item.id)" theme="danger">Удалить</Btn>
+        <Btn @click="onClickEdit(item.id)" theme="info">Изменить</Btn>
+        <Btn @click="onClickRemove(item.id)" theme="danger">Удалить</Btn>
       </template>
     </Table>
-    <router-link to="/CreateGroup">
+    <RouterLink :to="{ name: 'GroupEdit' }">
       <Btn :class="$style.create" theme="info">Создать</Btn>
-    </router-link>
+    </RouterLink>
   </div>
 </template>
 
 <script>
 import { useStore } from 'vuex';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-import { selectItems, removeItem } from '@/store/groups/selectors'
+import { selectItems, removeItem  } from '@/store/groups/selectors'
 import Table from '@/components/Table/Table';
 import Btn from '@/components/Btn/Btn';
 export default {
@@ -30,6 +28,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
     return {
       items: computed(() => selectItems(store)),
       headers: [
@@ -38,7 +37,10 @@ export default {
         {value: 'speciality', text: 'Специальность'},
         {value: 'control', text: 'Действие'},
       ],
-      onClick: id => { removeItem(store, id) },
+      onClickRemove: id => { removeItem(store, id) },
+      onClickEdit: ( id ) => {
+        router.push({ name: 'GroupEdit', params: { id } })
+      }
     }
   }
 }

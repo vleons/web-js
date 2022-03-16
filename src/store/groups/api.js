@@ -13,14 +13,30 @@ class Groups extends Api {
    * @param id
    * @returns {Promise<*>}
    */
-  remove = ( id ) => this.rest('/groups/delete-item.json', {
+  remove = ( id ) => this.rest('/groups/delete-item', {
     method: 'POST',
     data: id,
-  });
+  }).then(() => id) // then - заглушка, пока метод ничего не возвращает
 
-  add = () => this.rest('groups/add-item.json', {
+  /**
+   * Создаст новую запись в таблице
+   * @param group объект группы, взятый из FormGroup
+   * @returns {Promise<Response>}
+   */
+  add = ( group ) => this.rest('groups/add-item', {
     method: 'POST',
-  })
+    data: group,
+  }).then(() => ({...group, id: new Date().getTime()})) // then - заглушка, пока метод ничего не возвращает
+
+  /**
+   * Отправит измененную запись
+   * @param group объект группы, взятый из FormGroup
+   * @returns {Promise<*>}
+   */
+  update = ( group ) => this.rest('groups/update-item', {
+    method: 'POST',
+    data: group,
+  }).then(() => group) // then - заглушка, пока метод ничего не возвращает
 
 }
 

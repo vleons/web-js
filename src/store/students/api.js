@@ -16,12 +16,27 @@ class Students extends Api {
   remove = ( id ) => this.rest('/students/delete-item', {
     method: 'POST',
     data: id,
-  });
+  }).then(() => id) // then - заглушка, пока метод ничего не возвращает
 
-  add = ( form ) => this.rest('/students/add-item', {
+  /**
+   * Создаст новую запись в таблице
+   * @param student объект студента, взятый из FormStudent
+   * @returns {Promise<Response>}
+   */
+  add = ( student ) => this.rest('/students/add-item', {
     method: 'POST',
-    data: form,
-  });
+    data: student,
+  }).then(() => ({...student, id: new Date().getTime()})) // then - заглушка, пока метод ничего не возвращает
+
+  /**
+   * Отправит измененную запись
+   * @param student объект студента, взятый из FormStudent
+   * @returns {Promise<*>}
+   */
+  update = ( student ) => this.rest('/students/update-item', {
+    method: 'POST',
+    data: student,
+  }).then(() => student) // then - заглушка, пока метод ничего не возвращает
 
 }
 
