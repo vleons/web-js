@@ -25,5 +25,5 @@ export const updateItem = ( store, { id, group, speciality }) => {
 
 export const selectItemById = (store, id) => {
   const { getters } = store;
-  return getters['groups/getItemById']( id );
+  return getters['groups/itemsByKey'][id] || {};
 }

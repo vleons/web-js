@@ -25,5 +25,5 @@ export const updateItem = (store, { id, name, surname, patronymic, group }) => {
 
 export const selectItemById = (store, id) => {
   const { getters } = store;
-  return getters['students/getItemById']( id );
+  return getters['students/itemsByKey'][id] || {};
 }

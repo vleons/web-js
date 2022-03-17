@@ -7,9 +7,10 @@ export default {
   },
   getters: {
     items: state => state.items,
-    getItemById: state => id => {
-      return state.items.find(item => item.id === parseInt(id))
-    }
+    itemsByKey: state => state.items.reduce((res, cur) => {
+      res[cur['id']] = cur;
+      return res;
+    }, {}),
   },
   mutations: {
     setItems: (state, items) => {
@@ -22,7 +23,7 @@ export default {
       state.items = state.items.filter(({ id }) => id !== idRemove)
     },
     updateItem: (state, updateItem) => {
-      const index = state.items.findIndex(item => item.id === parseInt(updateItem.id));
+      const index = state.items.findIndex(item => +item.id === +updateItem.id);
       state.items[index] = updateItem;
     }
   },

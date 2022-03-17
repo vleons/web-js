@@ -12,7 +12,7 @@ const routes = [
     component: () => import('@/views/GroupsPage'),
   },
   {
-    path: '/studentEdit/:id?',
+    path: '/student-edit/:id?',
     name: 'StudentEdit',
     props: (route) => {
       return {
@@ -22,7 +22,7 @@ const routes = [
     component: () => import('@/views/StudentEdit'),
   },
   {
-    path: '/groupEdit/:id?',
+    path: '/group-edit/:id?',
     name: 'GroupEdit',
     props: (route) => {
       return {
@@ -33,7 +33,7 @@ const routes = [
   },
   {
     path: '/:catchAll(.*)',
-    name: 'Students',
+    name: 'NotFound',
     component: () => import('@/views/StudentsPage'),
   },
 ]

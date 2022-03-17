@@ -1,6 +1,14 @@
 <template>
   <div :class="$style.root">
-    <Table :headers="headers" :items="items">
+    <Table
+        :headers="[
+          {value: 'id', text: 'ID'},
+          {value: 'group', text: 'Группа'},
+          {value: 'speciality', text: 'Специальность'},
+          {value: 'control', text: 'Действие'},
+        ]"
+        :items="items"
+    >
       <template v-slot:control="{ item }">
         <Btn @click="onClickEdit(item.id)" theme="info">Изменить</Btn>
         <Btn @click="onClickRemove(item.id)" theme="danger">Удалить</Btn>
@@ -14,10 +22,10 @@
 
 <script>
 import { useStore } from 'vuex';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { selectItems, removeItem  } from '@/store/groups/selectors'
+import { selectItems, removeItem, fetchItems  } from '@/store/groups/selectors'
 import Table from '@/components/Table/Table';
 import Btn from '@/components/Btn/Btn';
 export default {
@@ -29,20 +37,17 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
+    onMounted(() => {
+      fetchItems(store);
+    });
     return {
       items: computed(() => selectItems(store)),
-      headers: [
-        {value: 'id', text: 'ID'},
-        {value: 'group', text: 'Группа'},
-        {value: 'speciality', text: 'Специальность'},
-        {value: 'control', text: 'Действие'},
-      ],
       onClickRemove: id => { removeItem(store, id) },
       onClickEdit: ( id ) => {
         router.push({ name: 'GroupEdit', params: { id } })
       }
     }
-  }
+  },
 }
 </script>
 

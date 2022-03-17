@@ -29,18 +29,18 @@
 </template>
 
 <script>
-import { computed, reactive } from 'vue';
+import { computed, reactive, onBeforeMount, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 
-import { selectItemById } from '@/store/groups/selectors';
+import { selectItemById, fetchItems } from '@/store/groups/selectors';
 import Btn from '@/components/Btn/Btn';
 export default {
-  name: 'FormGroup',
+  name: 'GroupForm',
   components: {
     Btn,
   },
   props: {
-    id: String,
+    id: { type: String, default: '' },
   },
   setup(props, context) {
     const store = useStore();
@@ -48,13 +48,18 @@ export default {
       id: '',
       group: '',
       speciality: '',
-    })
-    if (props.id) {
+    });
+    
+    onBeforeMount(() => {
+      fetchItems(store);
+    });
+
+    watchEffect(() => {
       const group = selectItemById( store,  props.id );
       Object.keys(group).forEach(key => {
         form[key] = group[key]
       })
-    }
+    });
 
     return {
       form,

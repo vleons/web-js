@@ -41,16 +41,16 @@
 </template>
 
 <script>
-import { computed, reactive } from 'vue';
+import { computed, reactive, onBeforeMount, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 
-import { selectItemById } from '@/store/students/selectors';
+import { selectItemById, fetchItems } from '@/store/students/selectors';
 import Btn from '@/components/Btn/Btn';
 
 export default {
-  name: 'FormStudent',
+  name: 'StudentForm',
   props: {
-    id: String,
+    id: { type: String, default: '' },
   },
   components: {
     Btn,
@@ -65,12 +65,16 @@ export default {
       group: '',
     });
 
-    if (props.id) {
-      const student = selectItemById(store, props.id);
+    onBeforeMount(() => {
+      fetchItems(store);
+    });
+
+    watchEffect(() => {
+      const student = selectItemById( store,  props.id );
       Object.keys(student).forEach(key => {
-        form[key] = student[key];
+        form[key] = student[key]
       })
-    }
+    });
 
     return {
       form,
