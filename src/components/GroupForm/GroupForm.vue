@@ -10,7 +10,11 @@
       <div :class="$style.label">
         <label for="group">Название группы</label>
       </div>
-      <input v-model="form.group" :class="$style.input" id="group" placeholder="Название группы" type="text">
+      <select v-model="form.group" :class="$style.select" name="group" id="group">
+        <option v-for="item in ['ПМИ','ПИ','МОС','ИВТ']" :key="item" :value="item">
+          {{ item }}
+        </option>
+      </select>
     </div>
     <div :class="$style.item">
       <div :class="$style.label">
@@ -94,5 +98,25 @@ export default {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
   }
+
+  .select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    -moz-padding-start: calc(0.75rem - 3px);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    appearance: none;
+  }
+
 }
 </style>

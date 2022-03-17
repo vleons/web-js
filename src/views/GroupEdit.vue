@@ -33,8 +33,3 @@ export default {
 }
 </script>
 
-<style module lang="scss">
-.root {
-
-}
-</style>

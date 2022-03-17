@@ -1,5 +1,11 @@
 <template>
   <div :class="$style.root">
+    <div v-if="form.id" :class="$style.item">
+      <div :class="$style.label">
+        <label for="id">ID</label>
+      </div>
+      <input v-model="form.id" disabled :class="$style.input"  id="id" placeholder="id" type="text">
+    </div>
     <div :class="$style.item">
       <div :class="$style.label">
         <label for="name">Имя</label>
@@ -38,27 +44,39 @@
 import { computed, reactive } from 'vue';
 import { useStore } from 'vuex';
 
-import { addItem } from '@/store/students/selectors';
+import { selectItemById } from '@/store/students/selectors';
 import Btn from '@/components/Btn/Btn';
+
 export default {
   name: 'FormStudent',
+  props: {
+    id: String,
+  },
   components: {
     Btn,
   },
-  setup() {
+  setup(props, context) {
     const store = useStore();
     const form = reactive({
+      id: '',
       name: '',
       surname: '',
       patronymic: '',
       group: '',
     });
 
+    if (props.id) {
+      const student = selectItemById(store, props.id);
+      Object.keys(student).forEach(key => {
+        form[key] = student[key];
+      })
+    }
+
     return {
       form,
       isValidForm: computed(() =>  !!(form.name && form.surname && form.patronymic && form.group)),
       onClick: () => {
-        addItem(store, form);
+        context.emit('submit', form);
       }
     }
   },

@@ -36,7 +36,7 @@ export default {
       const idRemovedItem = await api.remove( id );
       commit('removeItem', idRemovedItem);
     },
-    addItem: async ({ commit }, { group, speciality }) => { //TODO Нейминг group, возможно поменять на name
+    addItem: async ({ commit }, { group, speciality }) => {
       const item = await api.add({ group, speciality });
       commit('addItem', item);
     },
