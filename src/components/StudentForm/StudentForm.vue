@@ -43,6 +43,7 @@
 <script>
 import { computed, reactive, onBeforeMount, watchEffect } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 import { selectItemById, fetchItems } from '@/store/students/selectors';
 import Btn from '@/components/Btn/Btn';
@@ -57,6 +58,7 @@ export default {
   },
   setup(props, context) {
     const store = useStore();
+    const router = useRouter();
     const form = reactive({
       id: '',
       name: '',
@@ -81,6 +83,7 @@ export default {
       isValidForm: computed(() =>  !!(form.name && form.surname && form.patronymic && form.group)),
       onClick: () => {
         context.emit('submit', form);
+        router.push({ name: 'Students' })
       }
     }
   },

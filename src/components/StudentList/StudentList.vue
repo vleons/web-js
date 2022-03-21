@@ -45,7 +45,12 @@ export default {
     });
     return {
       items: computed(() => selectItems(store)),
-      onClickRemove: id => { removeItem(store, id) },
+      onClickRemove: id => {
+        const isConfirmRemove = confirm('Вы действительно хотите удалить запись?')
+        if (isConfirmRemove) {
+          removeItem(store, id)
+        }
+      },
       onClickEdit: id => {
         router.push({ name: 'StudentEdit', params: { id } })
       }

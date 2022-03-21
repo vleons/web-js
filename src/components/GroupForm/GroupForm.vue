@@ -31,6 +31,7 @@
 <script>
 import { computed, reactive, onBeforeMount, watchEffect } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 import { selectItemById, fetchItems } from '@/store/groups/selectors';
 import Btn from '@/components/Btn/Btn';
@@ -44,12 +45,13 @@ export default {
   },
   setup(props, context) {
     const store = useStore();
+    const router = useRouter();
     const form = reactive({
       id: '',
       group: '',
       speciality: '',
     });
-    
+
     onBeforeMount(() => {
       fetchItems(store);
     });
@@ -66,6 +68,7 @@ export default {
       isValidForm: computed(() =>  !!(form.group && form.speciality)),
       onClick: () => {
         context.emit('submit', form);
+        router.push({ name: 'Groups' })
       },
     }
 
