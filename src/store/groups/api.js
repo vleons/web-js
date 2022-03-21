@@ -15,7 +15,8 @@ class Groups extends Api {
    */
   remove = ( id ) => this.rest('/groups/delete-item', {
     method: 'POST',
-    data: id,
+    'Content-Type': 'application/json',
+    body: JSON.stringify({ id }),
   }).then(() => id) // then - заглушка, пока метод ничего не возвращает
 
   /**
@@ -25,7 +26,8 @@ class Groups extends Api {
    */
   add = ( group ) => this.rest('groups/add-item', {
     method: 'POST',
-    data: group,
+    'Content-Type': 'application/json',
+    body: JSON.stringify(group),
   }).then(() => ({...group, id: new Date().getTime()})) // then - заглушка, пока метод ничего не возвращает
 
   /**
@@ -35,7 +37,8 @@ class Groups extends Api {
    */
   update = ( group ) => this.rest('groups/update-item', {
     method: 'POST',
-    data: group,
+    'Content-Type': 'application/json',
+    body: JSON.stringify(group),
   }).then(() => group) // then - заглушка, пока метод ничего не возвращает
 
 }

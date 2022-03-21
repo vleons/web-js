@@ -15,7 +15,8 @@ class Students extends Api {
    */
   remove = ( id ) => this.rest('/students/delete-item', {
     method: 'POST',
-    data: id,
+    'Content-Type': 'application/json',
+    body: JSON.stringify({ id }),
   }).then(() => id) // then - заглушка, пока метод ничего не возвращает
 
   /**
@@ -25,7 +26,8 @@ class Students extends Api {
    */
   add = ( student ) => this.rest('/students/add-item', {
     method: 'POST',
-    data: student,
+    'Content-Type': 'application/json',
+    body: JSON.stringify(student),
   }).then(() => ({...student, id: new Date().getTime()})) // then - заглушка, пока метод ничего не возвращает
 
   /**
@@ -35,7 +37,8 @@ class Students extends Api {
    */
   update = ( student ) => this.rest('/students/update-item', {
     method: 'POST',
-    data: student,
+    'Content-Type': 'application/json',
+    body: JSON.stringify(student),
   }).then(() => student) // then - заглушка, пока метод ничего не возвращает
 
 }

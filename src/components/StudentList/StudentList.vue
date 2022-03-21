@@ -16,7 +16,7 @@
         <Btn @click="onClickRemove(item.id)" theme="danger">Удалить</Btn>
       </template>
     </Table>
-    <router-link to="/StudentEdit">
+    <router-link :to="{ name: 'StudentEdit' }">
       <Btn :class="$style.create" theme="info">Создать</Btn>
     </router-link>
   </div>
