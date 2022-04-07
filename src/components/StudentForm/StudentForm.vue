@@ -29,8 +29,8 @@
         <label for="group">Группа</label>
       </div>
       <select v-model="form.group" :class="$style.select" name="group" id="group">
-        <option v-for="item in ['ПМИ','ПИ','МОС','ИВТ']" :key="item" :value="item">
-          {{ item }}
+        <option v-for="({ group, id  }) in groupList" :key="id" :value="group">
+          {{ group }}
         </option>
       </select>
     </div>
@@ -46,6 +46,7 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 import { selectItemById, fetchItems } from '@/store/students/selectors';
+import { selectItems as selectGroups, fetchItems as fetchGroups } from '@/store/groups/selectors';
 import Btn from '@/components/Btn/Btn';
 
 export default {
@@ -59,6 +60,7 @@ export default {
   setup(props, context) {
     const store = useStore();
     const router = useRouter();
+    const groupList = computed(() => selectGroups(store))
     const form = reactive({
       id: '',
       name: '',
@@ -69,6 +71,7 @@ export default {
 
     onBeforeMount(() => {
       fetchItems(store);
+      fetchGroups(store);
     });
 
     watchEffect(() => {
@@ -79,6 +82,7 @@ export default {
     });
 
     return {
+      groupList,
       form,
       isValidForm: computed(() =>  !!(form.name && form.surname && form.patronymic && form.group)),
       onClick: () => {
