@@ -34,7 +34,7 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 import { selectItemById, fetchItems, selectItems } from '@/store/groups/selectors';
-import Btn from '@/components/Btn/Btn';
+import Btn from '@/components/Btn/Btn.vue';
 export default {
   name: 'GroupForm',
   components: {

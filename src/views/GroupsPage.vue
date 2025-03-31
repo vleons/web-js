@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import Layout from '@/components/Layout/Layout';
-import GroupList from '@/components/GroupList/GroupList';
+import Layout from '@/components/Layout/Layout.vue';
+import GroupList from '@/components/GroupList/GroupList.vue';
 
 export default {
   name: 'GroupsPage',

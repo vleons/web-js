@@ -47,7 +47,7 @@ import { useRouter } from 'vue-router';
 
 import { selectItemById, fetchItems } from '@/store/students/selectors';
 import { selectItems as selectGroups, fetchItems as fetchGroups } from '@/store/groups/selectors';
-import Btn from '@/components/Btn/Btn';
+import Btn from '@/components/Btn/Btn.vue';
 
 export default {
   name: 'StudentForm',

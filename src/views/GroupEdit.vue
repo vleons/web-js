@@ -11,8 +11,8 @@
 import { useStore } from 'vuex';
 
 import { updateItem, addItem } from '@/store/groups/selectors';
-import Layout from '@/components/Layout/Layout';
-import GroupForm from '@/components/GroupForm/GroupForm';
+import Layout from '@/components/Layout/Layout.vue';
+import GroupForm from '@/components/GroupForm/GroupForm.vue';
 export default {
   name: 'GroupEdit',
   props: {

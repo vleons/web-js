@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import Layout from '@/components/Layout/Layout';
-import StudentList from '@/components/StudentList/StudentList';
+import Layout from '@/components/Layout/Layout.vue';
+import StudentList from '@/components/StudentList/StudentList.vue';
 
 export default {
   name: 'Students',

@@ -8,8 +8,8 @@
 import { useStore } from 'vuex';
 
 import { updateItem, addItem } from '@/store/students/selectors';
-import StudentForm from '@/components/StudentForm/StudentForm';
-import Layout from '@/components/Layout/Layout';
+import StudentForm from '@/components/StudentForm/StudentForm.vue';
+import Layout from '@/components/Layout/Layout.vue';
 
 export default {
   name: 'StudentEdit',

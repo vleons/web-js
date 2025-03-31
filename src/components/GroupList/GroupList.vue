@@ -26,8 +26,8 @@ import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { selectItems, removeItem, fetchItems  } from '@/store/groups/selectors'
-import Table from '@/components/Table/Table';
-import Btn from '@/components/Btn/Btn';
+import Table from '@/components/Table/Table.vue';
+import Btn from '@/components/Btn/Btn.vue';
 export default {
   name: 'GroupList',
   components: {

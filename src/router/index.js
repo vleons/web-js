@@ -4,12 +4,12 @@ const routes = [
   {
     path: '/students',
     name: 'Students',
-    component: () => import('@/views/StudentsPage')
+    component: () => import('@/views/StudentsPage.vue')
   },
   {
     path: '/groups',
     name: 'Groups',
-    component: () => import('@/views/GroupsPage'),
+    component: () => import('@/views/GroupsPage.vue'),
   },
   {
     path: '/student-edit/:id?',
@@ -19,7 +19,7 @@ const routes = [
         id: route.params.id,
       }
     },
-    component: () => import('@/views/StudentEdit'),
+    component: () => import('@/views/StudentEdit.vue'),
   },
   {
     path: '/group-edit/:id?',
@@ -29,12 +29,12 @@ const routes = [
         id: route.params.id,
       }
     },
-    component: () => import('@/views/GroupEdit'),
+    component: () => import('@/views/GroupEdit.vue'),
   },
   {
     path: '/:catchAll(.*)',
     name: 'NotFound',
-    component: () => import('@/views/StudentsPage'),
+    component: () => import('@/views/StudentsPage.vue'),
   },
 ]
 
