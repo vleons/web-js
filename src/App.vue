@@ -1,7 +1,6 @@
 <template>
   <div id="nav">
-    <RouterLink :to="{ name: 'Groups' }">Группы</RouterLink>
-    <RouterLink :to="{ name: 'Students' }">Студенты</RouterLink>
+    <RouterLink :to="{ name: 'Products' }">Продукты</RouterLink>
   </div>
   <router-view/>
 </template>

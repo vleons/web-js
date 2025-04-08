@@ -2,45 +2,25 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/students',
-    name: 'Students',
-    component: () => import('@/views/StudentsPage.vue')
+    path: '/',
+    redirect: '/products'
   },
   {
-    path: '/groups',
-    name: 'Groups',
-    component: () => import('@/views/GroupsPage.vue'),
+    path: '/products',
+    name: 'Products',
+    component: () => import('@/views/ProductsPage.vue')
   },
   {
-    path: '/student-edit/:id?',
-    name: 'StudentEdit',
-    props: (route) => {
-      return {
-        id: route.params.id,
-      }
-    },
-    component: () => import('@/views/StudentEdit.vue'),
+    path: '/products/:id/edit',
+    name: 'ProductEdit',
+    component: () => import('@/views/ProductEdit.vue')
   },
-  {
-    path: '/group-edit/:id?',
-    name: 'GroupEdit',
-    props: (route) => {
-      return {
-        id: route.params.id,
-      }
-    },
-    component: () => import('@/views/GroupEdit.vue'),
-  },
-  {
-    path: '/:catchAll(.*)',
-    name: 'NotFound',
-    component: () => import('@/views/StudentsPage.vue'),
-  },
+  // ... ваши существующие маршруты для студентов и групп
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 })
 
-export default router
+export default router;

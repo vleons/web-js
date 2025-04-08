@@ -1,18 +1,35 @@
 class Api {
   constructor() {
-    this.base = '/rest';
+    this.base = '/rest' // Базовый путь к папке public/rest
   }
 
-  request = async (method, options) => {
-    const url = this.base + method;
-    return fetch(url, options)
+  /**
+   * Универсальный метод для запросов
+   * @param {string} url - Относительный путь (/products/list.json)
+   * @param {object} options - Опции fetch
+   */
+  request = async (url, options = {}) => {
+    const fullUrl = this.base + url
+    
+    try {
+      const response = await fetch(fullUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers
+        },
+        ...options
+      })
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      return await response.json()
+    } catch (error) {
+      console.error(`API request failed (${fullUrl}):`, error)
+      throw error
+    }
   }
-
-  rest = async (method, options) => {
-    return this.request(method, options)
-      .then((data) => data);
-  }
-
 }
 
-export default Api;
+export default Api

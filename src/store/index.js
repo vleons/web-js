@@ -1,12 +1,8 @@
 import { createStore } from 'vuex'
-import students from './students';
-import groups from './groups';
+import products from './products' // Убедитесь в правильном пути
+
 export default createStore({
   modules: {
-    students,
-    groups,
-  },
-  state: {},
-  mutations: {},
-  actions: {},
+    products // Должно совпадать с именем, которое вы используете в mapActions
+  }
 })

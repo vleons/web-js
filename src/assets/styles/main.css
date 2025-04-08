@@ -1,0 +1,58 @@
+/* Базовые стили */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+  }
+  
+  /* Глобальные классы */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  /* Стили кнопок */
+  .btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  
+  .btn-primary {
+    background-color: #42b983;
+    color: white;
+  }
+  
+  .btn-danger {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  /* Анимации */
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.3s;
+  }
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+  
+  /* Формы */
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
