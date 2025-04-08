@@ -15,7 +15,6 @@ const routes = [
     name: 'ProductEdit',
     component: () => import('@/views/ProductEdit.vue')
   },
-  // ... ваши существующие маршруты для студентов и групп
 ]
 
 const router = createRouter({

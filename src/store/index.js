@@ -1,8 +1,8 @@
 import { createStore } from 'vuex'
-import products from './products' // Убедитесь в правильном пути
+import products from './products'
 
 export default createStore({
   modules: {
-    products // Должно совпадать с именем, которое вы используете в mapActions
+    products
   }
 })

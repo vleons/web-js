@@ -29,29 +29,26 @@ export default {
   },
   actions: {
     async load({ commit }) {
-      console.log('Начало загрузки продуктов') // Шаг 1
+      console.log('Начало загрузки продуктов') // загрузка продуктов
       
       try {
         const products = await api.getProducts()
-        console.log('Данные из API:', products) // Шаг 2
+        console.log('Данные из API:', products) // Запрос к API для получения продуктов
         
         commit('setItems', products)
-        console.log('Данные после коммита:', this.state.items) // Шаг 3
+        console.log('Данные после коммита:', this.state.items) //Сохранение данных в хранилище 
       } catch (error) {
         console.error('Ошибка загрузки:', error)
       }
     },
     async createProduct({ commit }, product) {
       commit('addItem', product)
-      // В реальном приложении здесь был бы API вызов
     },
     async updateProduct({ commit }, product) {
       commit('updateItem', product)
-      // В реальном приложении здесь был бы API вызов
     },
     async deleteProduct({ commit }, id) {
       commit('removeItem', id)
-      // В реальном приложении здесь был бы API вызов
     }
   }
 }

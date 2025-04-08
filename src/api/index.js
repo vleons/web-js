@@ -4,7 +4,7 @@ class Api {
   }
 
   /**
-   * Универсальный метод для запросов
+   * метод для запросов
    * @param {string} url - Относительный путь (/products/list.json)
    * @param {object} options - Опции fetch
    */
@@ -12,7 +12,7 @@ class Api {
     const fullUrl = this.base + url
     
     try {
-      const response = await fetch(fullUrl, {
+      const response = await fetch(fullUrl, { //выполнение запросов к серверу
         headers: {
           'Content-Type': 'application/json',
           ...options.headers
