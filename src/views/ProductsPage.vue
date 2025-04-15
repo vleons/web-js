@@ -4,7 +4,53 @@
     <div class="product-form card">
       <h2>Добавление продукта</h2>
       <form @submit.prevent="handleSubmit">
-        <!-- Поля формы остаются без изменений -->
+        <div class="form-group">
+          <label>Название *</label>
+          <input v-model="form.name" required class="form-control">
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>ID акции</label>
+            <select v-model="form.sale_id" class="form-control">
+              <option v-for="n in 4" :value="n" :key="n">{{ n }}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Свойство</label>
+            <select v-model="form.properties_id" class="form-control">
+              <option v-for="property in propertiesList" 
+                      :value="property.id" 
+                      :key="property.id">
+                {{ property.name }}
+              </option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Цена *</label>
+            <input v-model="form.price" type="number" step="0.01" required class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Описание</label>
+          <textarea v-model="form.description" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Изображение</label>
+          <div class="file-upload">
+            <label class="file-upload-btn">
+              <input type="file" @change="handleImageUpload" accept="image/*">
+              {{ imageName || 'Выбрать файл' }}
+            </label>
+            <span class="file-info">{{ imageName ? 'Файл выбран' : 'файл не выбран' }}</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Добавить</button>
       </form>
     </div>
 
@@ -120,17 +166,14 @@ export default {
     ...mapState('products', ['items']),
     ...mapState('properties', { propertiesItems: 'items' }),
     
-    // Продукты для отображения
     productsList() {
       return this.items || []
     },
     
-    // Свойства для отображения
     propertiesList() {
       return this.propertiesItems || []
     },
     
-    // Отфильтрованные продукты
     filteredProducts() {
       const query = this.searchQuery.toLowerCase()
       return this.productsList.filter(p => 
@@ -142,13 +185,11 @@ export default {
     ...mapActions('products', ['load', 'createProduct', 'updateProduct', 'deleteProduct']),
     ...mapActions('properties', ['load']),
     
-    // Получить название свойства по ID
     getPropertyName(id) {
       const property = this.propertiesList.find(p => p.id === id)
       return property ? property.name : 'Не указано'
     },
     
-    // Остальные методы без изменений
     formatPrice(price) {
       return new Intl.NumberFormat('ru-RU', {
         style: 'currency',
