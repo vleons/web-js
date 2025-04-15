@@ -1,65 +1,58 @@
 <template>
-  <div class="modal-overlay">
+  <div class="modal-overlay" @click.self="close">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Редактирование продукта</h3>
-        <button @click="$emit('close')" class="modal-close">&times;</button>
+        <button @click="close" class="modal-close">&times;</button>
       </div>
       
-      <form @submit.prevent="handleSave">
-        <div class="form-group">
-          <label>Название</label>
-          <input v-model="localProduct.name" required class="form-control">
-        </div>
-        
-        <div class="form-row">
+      <div class="modal-body">
+        <form @submit.prevent="saveChanges">
           <div class="form-group">
-            <label>ID акции</label>
-            <select v-model="localProduct.sale_id" class="form-control">
-              <option v-for="n in 4" :value="n" :key="n">{{ n }}</option>
-            </select>
+            <label>Название *</label>
+            <input v-model="editedProduct.name" required class="form-control">
           </div>
           
-          <div class="form-group">
-            <label>Цена</label>
-            <input 
-              v-model="localProduct.price" 
-              type="number" 
-              step="0.01" 
-              required 
-              class="form-control"
-            >
+          <div class="form-row">
+            <div class="form-group">
+              <label>ID акции</label>
+              <select v-model="editedProduct.sale_id" class="form-control">
+                <option v-for="n in 4" :value="n" :key="n">{{ n }}</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Свойство</label>
+              <select v-model="editedProduct.properties_id" class="form-control">
+                <option v-for="property in properties" 
+                        :value="property.id" 
+                        :key="property.id">
+                  {{ property.name }}
+                </option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Цена *</label>
+              <input v-model="editedProduct.price" type="number" step="0.01" required class="form-control">
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label>Описание</label>
-          <textarea v-model="localProduct.description" class="form-control"></textarea>
-        </div>
+          <div class="form-group">
+            <label>Описание</label>
+            <textarea v-model="editedProduct.description" class="form-control"></textarea>
+          </div>
 
-        <div class="form-group">
-          <label>Изображение</label>
-          <img 
-            v-if="localProduct.img" 
-            :src="localProduct.img" 
-            class="current-image"
-          >
-          <input 
-            type="file" 
-            @change="handleImageUpload" 
-            class="form-control"
-          >
-        </div>
-
-        <div class="modal-actions">
-          <button type="button" @click="$emit('close')" class="btn btn-cancel">
-            Отмена
-          </button>
-          <button type="submit" class="btn btn-save">
-            Сохранить изменения
-          </button>
-        </div>
-      </form>
+          <div class="modal-footer">
+            <button type="button" @click="close" class="btn btn-secondary">
+              Отмена
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Сохранить
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -67,25 +60,20 @@
 <script>
 export default {
   props: {
-    product: {
-      type: Object,
-      required: true
-    }
+    product: Object,
+    properties: Array
   },
   data() {
     return {
-      localProduct: { ...this.product }
+      editedProduct: { ...this.product }
     }
   },
   methods: {
-    handleImageUpload(e) {
-      const file = e.target.files[0]
-      if (file) {
-        this.localProduct.img = URL.createObjectURL(file)
-      }
+    saveChanges() {
+      this.$emit('save', this.editedProduct)
     },
-    handleSave() {
-      this.$emit('save', this.localProduct)
+    close() {
+      this.$emit('close')
     }
   }
 }
@@ -98,7 +86,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,17 +97,22 @@ export default {
   background: white;
   border-radius: 8px;
   width: 600px;
-  max-width: 95%;
+  max-width: 90%;
   max-height: 90vh;
   overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+  margin: 0;
 }
 
 .modal-close {
@@ -130,34 +123,71 @@ export default {
   color: #666;
 }
 
-form {
+.modal-body {
   padding: 20px;
 }
 
-.current-image {
-  display: block;
-  max-width: 100px;
-  max-height: 100px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-
-.modal-actions {
+.modal-footer {
+  padding: 20px;
+  border-top: 1px solid #eee;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
 }
 
-.btn-cancel {
+.btn-secondary {
   background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background: #e5e5e5;
+}
+
+/* Копируем стили из ProductsPage для формы */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
   color: #333;
 }
 
-.btn-save {
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary {
   background: #42b983;
   color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #3aa876;
 }
 </style>
